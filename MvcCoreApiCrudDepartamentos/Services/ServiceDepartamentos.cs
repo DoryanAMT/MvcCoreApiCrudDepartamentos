@@ -1,5 +1,6 @@
 ﻿using MvcCoreApiCrudDepartamentos.Models;
 using Newtonsoft.Json;
+using NuGet.Configuration;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -83,6 +84,38 @@ namespace MvcCoreApiCrudDepartamentos.Services
                     (json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response =
                     await client.PostAsync(request, content);
+            }
+        }
+        public async Task UpdateDepartamentoAsync
+            (int id, string nombre, string localidad)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string request = "api/departamentos";
+                client.BaseAddress = new Uri(this.UrlApi);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.header);
+                Departamento departamento = new Departamento();
+                departamento.IdDepartamento = id;
+                departamento.Nombre = nombre;
+                departamento.Localidad = localidad;
+                string json = JsonConvert.SerializeObject(departamento);
+                StringContent content = new StringContent
+                    (json, Encoding.UTF8, "application/json");
+                await client.PutAsync(request, content);
+            }
+        }
+        public async Task DeleteDepartamento
+            (int idDepartamento)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string request = "api/departamentos/"+idDepartamento;
+                client.BaseAddress = new Uri(this.UrlApi);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.header);
+                HttpResponseMessage response =
+                    await client.DeleteAsync(request);
             }
         }
     }

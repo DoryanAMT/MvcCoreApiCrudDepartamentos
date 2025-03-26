@@ -43,6 +43,18 @@
                 class="btn btn-info">
                 Details
                 </a>
+                <a asp-controller="Departamentos"
+                    asp-action="Edit"
+                    asp-route-id="@item.IdDepartamento"
+                    class="btn btn-warning">
+                    Details
+                </a>
+                <a asp-controller="Departamentos"
+                    asp-action="Delete"
+                    asp-route-id="@item.IdDepartamento"
+                    class="btn btn-danger">
+                    Delete
+                </a>
             </td>
         </tr>
 }
