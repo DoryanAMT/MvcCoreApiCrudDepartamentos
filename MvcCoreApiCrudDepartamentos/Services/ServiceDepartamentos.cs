@@ -30,11 +30,6 @@ namespace MvcCoreApiCrudDepartamentos.Services
             Departamento data = await this.CallApiAsync<Departamento>(request);
             return data;
         }
-        //public async Task InsertDepartamento()
-        //{
-
-        //}
-
 
         private async Task<T> CallApiAsync<T>
             (string request)
